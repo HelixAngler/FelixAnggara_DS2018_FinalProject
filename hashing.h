@@ -10,6 +10,7 @@ class Hash
 	private:
 		unsigned int size;
 		AVLtree<T> **hashtab;
+		//hash function
 		unsigned int hashing(string identifier){
 			unsigned int hashresult=0;
 			unsigned int temp;
@@ -23,19 +24,21 @@ class Hash
 			while(hashresult >= size){
 				hashresult = hashresult - this->size;
 			}
+			//'hashresult==...' must to be added or changed depending by the hash table size and modulo value
 			if(hashresult==0 || hashresult==117 || hashresult==119 || hashresult==115 || hashresult == 121 || hashresult == 118){
                 hashresult=+1;
 			}
 			return hashresult;
 		}
 	public:
-
+	    //constructor
 		Hash(const int &si=1000)
 		{
 			this->size=si;
 			this->hashtab = new AVLtree<T>*[this->size];
 
 		}
+		//add method
 		bool add(string idtifier,T value){
 			unsigned int hashcoord=this->hashing(idtifier);
 
@@ -46,6 +49,7 @@ class Hash
                 return this->hashtab[hashcoord]->insert(value);
 
 		}
+		//delete method
 		void del(string idtifier, T value){
 		    unsigned int hashcoord=this->hashing(idtifier);
 
@@ -54,6 +58,7 @@ class Hash
                 }
 
         }
+        //data retrieval method
         T get_thing(string idtifier, T value){
 		    T retrieval;
 		    unsigned int hashcoord=this->hashing(idtifier);
@@ -64,6 +69,7 @@ class Hash
 
 			return retrieval;
         }
+        //search method
         bool checkav(string idtifier, T value){
             bool retrieval = false;
 		    unsigned int hashcoord=this->hashing(idtifier);

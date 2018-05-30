@@ -3,6 +3,7 @@
 #include<iostream>
 #include<string>
 using namespace std;
+//data container
 class Identity{
 public:
     string IdName;
@@ -14,6 +15,7 @@ public:
     bool status;
     string email;
     string callnum;
+    //operator overload
     bool operator==(const Identity &secondary)const{
         return this->IdName == secondary.IdName;
     }

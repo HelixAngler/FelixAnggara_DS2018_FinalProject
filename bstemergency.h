@@ -52,6 +52,7 @@ private:
 };
 
 /* AVL class definition */
+//balancing method
 template <class T>
 void AVLtree<T>::rebalance(AVLnode<T> *n) {
     setBalance(n);
@@ -76,7 +77,7 @@ void AVLtree<T>::rebalance(AVLnode<T> *n) {
         root = n;
     }
 }
-
+//left rotation method
 template <class T>
 AVLnode<T>* AVLtree<T>::rotateLeft(AVLnode<T> *a) {
     AVLnode<T> *b = a->right;
@@ -102,7 +103,7 @@ AVLnode<T>* AVLtree<T>::rotateLeft(AVLnode<T> *a) {
     setBalance(b);
     return b;
 }
-
+//right rotation method
 template <class T>
 AVLnode<T>* AVLtree<T>::rotateRight(AVLnode<T> *a) {
     AVLnode<T> *b = a->left;
@@ -128,31 +129,31 @@ AVLnode<T>* AVLtree<T>::rotateRight(AVLnode<T> *a) {
     setBalance(b);
     return b;
 }
-
+//left right rotation method
 template <class T>
 AVLnode<T>* AVLtree<T>::rotateLeftThenRight(AVLnode<T> *n) {
     n->left = rotateLeft(n->left);
     return rotateRight(n);
 }
-
+//right left rotation method
 template <class T>
 AVLnode<T>* AVLtree<T>::rotateRightThenLeft(AVLnode<T> *n) {
     n->right = rotateRight(n->right);
     return rotateLeft(n);
 }
-
+//height method
 template <class T>
 int AVLtree<T>::height(AVLnode<T> *n) {
     if (n == NULL)
         return -1;
     return 1 + std::max(height(n->left), height(n->right));
 }
-
+//set balance method
 template <class T>
 void AVLtree<T>::setBalance(AVLnode<T> *n) {
     n->balance = height(n->right) - height(n->left);
 }
-
+//print balance method
 template <class T>
 void AVLtree<T>::printBalance(AVLnode<T> *n) {
     if (n != NULL) {
@@ -161,20 +162,20 @@ void AVLtree<T>::printBalance(AVLnode<T> *n) {
         printBalance(n->right);
     }
 }
-
+//constructor
 template <class T>
 AVLtree<T>::AVLtree(void) : root(NULL) {}
-
+//constructor with insert value (my own addition)
 template <class T>
 AVLtree<T>::AVLtree(T key) : root(NULL) {
     bool k = this->insert(key);
 }
-
+//destructor
 template <class T>
 AVLtree<T>::~AVLtree(void) {
     delete root;
 }
-
+//insert method
 template <class T>
 bool AVLtree<T>::insert(T key) {
     if (root == NULL) {
@@ -210,7 +211,7 @@ bool AVLtree<T>::insert(T key) {
 
     return true;
 }
-
+//delete method
 template <class T>
 void AVLtree<T>::deleteKey(const T &delKey) {
     if (root == NULL)
@@ -251,6 +252,7 @@ void AVLtree<T>::deleteKey(const T &delKey) {
     }
 }
 //my own implementation
+//retrieval method
 template<class T>
 T AVLtree<T>::findin(const T &key){
     return this->searchfor(key, this->root);
@@ -271,6 +273,7 @@ T AVLtree<T>::searchfor(const T &key, AVLnode<T> *traverse){
     }
     return result;
 }
+//search method
 template<class T>
 bool AVLtree<T>::check(const T &key){
     return this->checking(key, this->root);
@@ -291,6 +294,7 @@ bool AVLtree<T>::checking(const T &key, AVLnode<T> *traverse){
     }
     return result;
 }
+//in order method
 template<class T>
 void AVLtree<T>::inorder(){
     this->inordering(this->root);
@@ -304,6 +308,7 @@ void AVLtree<T>::inordering(AVLnode<T> *temp){
     }
 }
 //end of my own implementation
+//print balance
 template <class T>
 void AVLtree<T>::printBalance() {
     printBalance(root);
