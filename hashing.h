@@ -9,7 +9,7 @@ class Hash
 {
 	private:
 		unsigned int size;
-		AVLtree<T> **hashtab;
+		AVLtree<T> *hashtab;
 		//hash function
 		unsigned int hashing(string identifier){
 			unsigned int hashresult=0;
@@ -25,9 +25,9 @@ class Hash
 				hashresult = hashresult - this->size;
 			}
 			//'hashresult==...' must to be added or changed depending by the hash table size and modulo value
-			if(hashresult==0 || hashresult==117 || hashresult==119 || hashresult==115 || hashresult == 121 || hashresult == 118){
+			/*if(hashresult==0 || hashresult==117 || hashresult==119 || hashresult==115 || hashresult == 121 || hashresult == 118){
                 hashresult=+1;
-			}
+			}*/
 			return hashresult;
 		}
 	public:
@@ -35,27 +35,27 @@ class Hash
 		Hash(const int &si=1000)
 		{
 			this->size=si;
-			this->hashtab = new AVLtree<T>*[this->size];
+			this->hashtab = new AVLtree<T>[si];
 
 		}
 		//add method
 		bool add(string idtifier,T value){
 			unsigned int hashcoord=this->hashing(idtifier);
 
-                if(this->hashtab[hashcoord]==NULL){
+                /*if(this->hashtab[hashcoord]==NULL){
                     hashtab[hashcoord]=new AVLtree<T>();
 
-                }
-                return this->hashtab[hashcoord]->insert(value);
+                }*/
+                return this->hashtab[hashcoord].insert(value);
 
 		}
 		//delete method
 		void del(string idtifier, T value){
 		    unsigned int hashcoord=this->hashing(idtifier);
 
-                if(this->hashtab[hashcoord]!=NULL){
-                    hashtab[hashcoord]->deleteKey(value);
-                }
+                //if(this->hashtab[hashcoord]!=NULL){
+                    hashtab[hashcoord].deleteKey(value);
+                //}
 
         }
         //data retrieval method
@@ -63,9 +63,9 @@ class Hash
 		    T retrieval;
 		    unsigned int hashcoord=this->hashing(idtifier);
 
-                if(this->hashtab[hashcoord]!=NULL){
-                    retrieval = hashtab[hashcoord]->findin(value);
-                }
+                //if(this->hashtab[hashcoord]!=NULL){
+                    retrieval = hashtab[hashcoord].findin(value);
+                //}
 
 			return retrieval;
         }
@@ -74,9 +74,9 @@ class Hash
             bool retrieval = false;
 		    unsigned int hashcoord=this->hashing(idtifier);
 
-                if(this->hashtab[hashcoord]!=NULL){
-                    retrieval = hashtab[hashcoord]->check(value);
-                }
+                //if(this->hashtab[hashcoord]!=NULL){
+                    retrieval = hashtab[hashcoord].check(value);
+                //}
 
 			return retrieval;
         }
